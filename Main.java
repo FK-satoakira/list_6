@@ -14,7 +14,7 @@ public class Main{
 
 
 // A.答えがわかった。変数の名が被ってたから。
-// Hero h = new Hero();　→　MyFunction func = (Hero ここは「h」以外にしないといけない)。
+// Hero h = new Hero();　→　MyFunction func = (Hero [ここは「h」以外にしないといけない])。(Hero a),(Hero b),(Hero c)...はOK。
 
 
 
