@@ -1,23 +1,22 @@
-// 「スレッド「メイン」の例外java.lang.Error：未解決のコンパイル問題：
-// ラムダ式のパラメーターhは、外側のスコープで定義されている別のローカル変数を再宣言できません。」
-// このコードだとこういうエラーが出てしまう
 package practice;
-public class Main{
-	public static void main(String[] args) {
-		Hero h = new Hero();
-//		MyFunction func = (h) -> {return h.getHp()+h.getHp();};
-		MyFunction func = (Hero) -> {return h.hp;};　　/*ここを(Hero h)とできない*/
-		int a = func.call(h);
-		System.out.println(a);
-	}
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+    	List<Hero> list = new ArrayList<>();
+    	for(int i=0; i<100000; i++) {
+    		list.add(new Hero("red"));
+    		list.add(new Hero("blue"));
+    		list.add(new Hero("yellow"));
+    		list.add(new Hero("black"));
+    	}
+		list.stream().forEach(a -> a.sleep()); /*15秒*/
+
+		for (Hero hero : list) { /*確かにこっちのほうが少し速い。14秒*/
+			hero.sleep();
+		}
+
+    }
 }
-
-
-// A.答えがわかった。変数の名が被ってたから。
-// Hero h = new Hero();　→　MyFunction func = (Hero [ここは「h」以外にしないといけない])。(Hero a),(Hero b),(Hero c)...はOK。
-
-
-
-
-
-
